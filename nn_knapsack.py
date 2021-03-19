@@ -45,12 +45,6 @@ class Solution:
 
 
 def calculate_profit(packed_items: FrozenSet[str], instance: List[List[str]]) -> float:
-    # print(instance)
-    # print([item[profit] for item in instance if item[name] in packed_items])
-    # print([item[profit] for item in instance])
-    # print([item[name] for item in instance])
-    # print(packed_items)
-    # exit()
     return sum(item[profit] for item in instance if item[name] in packed_items)
 
 
@@ -155,7 +149,6 @@ def search_optimal_local_solution(initial_set: FrozenSet[str], instance: List[Li
     curr_sol = initial_solution
     optimal_solution: Solution = initial_solution if initial_solution.feasible else None
     if print_output:
-        print(instance)
         print(curr_sol.get_information())
     while True:
         step += 1
@@ -165,8 +158,9 @@ def search_optimal_local_solution(initial_set: FrozenSet[str], instance: List[Li
         if not best_option[1].feasible or best_option[1] < optimal_solution or best_option[2] is None:
             break
         optimal_solution = best_option[1]
+        curr_sol = optimal_solution
         if print_output:
-            print("We %s %s\n\n" % (best_option[0], best_option[2]))
+            print("We %s %s\n" % (best_option[0], best_option[2]))
 
     if print_output:
         if optimal_solution is not None:
